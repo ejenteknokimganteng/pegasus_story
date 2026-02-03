@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Pegasus Dafa – Chapter 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1a0000, #000);
+    color: white;
+    text-align: center;
+}
+
+.container {
+    max-width: 500px;
+    margin: 60px auto;
+    background: rgba(0,0,0,0.75);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.story {
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: crimson;
+    color: white;
+    font-size: 16px;
+}
+
+button:hover {
+    background: darkred;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Chapter 2 – Dunia Bawah Hades</h1>
+    <div id="story" class="story"></div>
+    <div id="buttons"></div>
+</div>
+
+<script>
+function show(text, buttons = []) {
+    document.getElementById("story").innerHTML = text;
+    const btnDiv = document.getElementById("buttons");
+    btnDiv.innerHTML = "";
+    buttons.forEach(b => {
+        const btn = document.createElement("button");
+        btn.innerText = b.text;
+        btn.onclick = b.action;
+        btnDiv.appendChild(btn);
+    });
+}
+
+// Scene 1
+function scene1() {
+    show(
+        "Dafa terbangun di Dunia Bawah, wilayah Neraka Hades.<br><br>" +
+        "Kabut hitam menyelimuti sungai gelap yang memisahkan dua dunia.",
+        [
+            { text: "Lanjutkan", action: scene2 }
+        ]
+    );
+}
+
+// Scene 2 – Religius muncul
+function scene2() {
+    show(
+        "Sesosok Specter Hades muncul.<br><br>" +
+        "\"Namaku Religius,\" katanya.<br>" +
+        "\"Mau aku bantu menyebrangi sungai ini?\"",
+        [
+            { text: "Baiklah, aku terima", action: scene3 }
+        ]
+    );
+}
+
+// Scene 3 – Pengkhianatan
+function scene3() {
+    show(
+        "Tanpa disadari, Religius tersenyum sinis.<br><br>" +
+        "\"Saint Athena sepertimu tak pantas hidup!\"<br>" +
+        "Ia mencoba membunuh Dafa!",
+        [
+            { text: "Bersiap Bertarung", action: scene4 }
+        ]
+    );
+}
+
+// Scene 4 – Dragon Syaki datang
+function scene4() {
+    show(
+        "TIBA-TIBA!!<br><br>" +
+        "Sebuah Cosmo kuat menghantam Religius!<br><br>" +
+        "\"Menjauh darinya!\"<br>" +
+        "Seorang Saint muda muncul—<b>Dragon Syaki</b>!",
+        [
+            { text: "Lihat Serangan Syaki", action: scene5 }
+        ]
+    );
+}
+
+// Scene 5 – Jurus Dragon
+function scene5() {
+    show(
+        "Syaki melompat ke udara dan berteriak:<br><br>" +
+        "<b>\"ROZAN SO YU HA!!!\"</b><br><br>" +
+        "Pukulan naga menghancurkan Religius!",
+        [
+            { text: "Lanjutkan", action: scene6 }
+        ]
+    );
+}
+
+// Scene 6 – Setelah menang
+function scene6() {
+    show(
+        "Religius dikalahkan.<br><br>" +
+        "Dafa dan Syaki akhirnya berhasil menyebrangi sungai Dunia Bawah.",
+        [
+            { text: "Berkenalan", action: scene7 }
+        ]
+    );
+}
+
+// Scene 7 – Dialog perkenalan
+function scene7() {
+    show(
+        "Syaki: \"Halo, siapa namamu?\"<br><br>" +
+        "Dafa: \"Namaku Dafa, Pegasus Dafa.\"<br><br>" +
+        "Syaki: \"Jadi kau salah satu Saint pilihan Athena ya.\"<br>" +
+        "\"Salam kenal, aku Dragon Syaki.\"",
+        [
+            { text: "Chapter 3 (Coming Soon)", action: () => alert("Chapter 3 akan berlanjut!") }
+        ]
+    );
+}
+
+scene1();
+</script>
+
+</body>
+</html>
+<a href="chapter3.html">
+  <button>Lanjut ke Chapter 3</button>

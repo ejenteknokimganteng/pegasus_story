@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pegasus Dafa – Chapter 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0b0f2b, #1b1f4a);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .game {
+      background: rgba(0,0,0,0.8);
+      padding: 20px;
+      border-radius: 14px;
+      width: 95%;
+      max-width: 560px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.7);
+    }
+    h1 { text-align: center; }
+    p { white-space: pre-line; line-height: 1.6; }
+    .choices {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #f5c542;
+    }
+    button:hover { background: #ffd966; }
+    .hp { margin-top: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<div class="game">
+  <h1>Chapter 1 – Kebangkitan Pegasus</h1>
+  <p id="story"></p>
+  <div class="hp" id="hp"></div>
+  <div class="choices" id="choices"></div>
+</div>
+
+<script>
+let playerHP = 100;
+let bossHP = 120;
+let mode = "story";
+
+const storyEl = document.getElementById("story");
+const choicesEl = document.getElementById("choices");
+const hpEl = document.getElementById("hp");
+
+function showText(text) {
+  storyEl.textContent = text;
+}
+
+function clearChoices() {
+  choicesEl.innerHTML = "";
+}
+
+function addChoice(text, action) {
+  const btn = document.createElement("button");
+  btn.textContent = text;
+  btn.onclick = action;
+  choicesEl.appendChild(btn);
+}
+
+/* ===== STORY ===== */
+
+function startStory() {
+  mode = "story";
+  showText(
+    "Dafa tiba di kuil suci.\n\n" +
+    "Dewi Athena terlihat kewalahan melawan Hades.\n\n" +
+    "12 Pelindung Emas Zodiak berdiri menjaga.\n\n" +
+    "Athena mengirim pesan suci:\n" +
+    "'Mohon datanglah, Saint Pegasus.'"
+  );
+  hpEl.textContent = "";
+  clearChoices();
+  addChoice("Menghampiri Athena", athenaScene);
+}
+
+function athenaScene() {
+  showText(
+    "Hades mundur ke kegelapan.\n\n" +
+    "Namun Cynthia telah diculik ke Dunia Bawah.\n\n" +
+    "Dafa merasa gagal melindungi temannya."
+  );
+  clearChoices();
+  addChoice("Menahan kesedihan", minosScene);
+}
+
+function minosScene() {
+  showText(
+    "Aura gelap menyelimuti sekitar.\n\n" +
+    "'Aku Minos, Specter Hades.'\n" +
+    "'Aku menginginkanmu, Pegasus Dafa.'"
+  );
+  clearChoices();
+  addChoice("Siapa kamu?", pressureScene);
+}
+
+function pressureScene() {
+  showText(
+    "Tekanan kosmo Minos menekan tubuh Dafa.\n\n" +
+    "Tubuhnya terasa panas, seolah akan meledak."
+  );
+  clearChoices();
+  addChoice("Lepaskan amarah", transformScene);
+}
+
+function transformScene() {
+  showText(
+    "🔥 Kosmo Dafa membara!\n\n" +
+    "'Bersiaplah Minos! Ini untuk Cynthia!'\n\n" +
+    "Dafa berubah menjadi Saint Pegasus muda!"
+  );
+  clearChoices();
+  addChoice("⚔️ Hadapi Minos", startBattle);
+}
+
+/* ===== BATTLE SYSTEM ===== */
+
+function startBattle() {
+  mode = "battle";
+  playerHP = 100;
+  bossHP = 120;
+  updateBattleUI();
+}
+
+function updateBattleUI() {
+  showText("⚔️ BOSS FIGHT: MINOS ⚔️");
+  hpEl.textContent = `HP Dafa: ${playerHP} | HP Minos: ${bossHP}`;
+  clearChoices();
+  addChoice("Tinju Pegasus", attackPegasus);
+  addChoice("Cosmos Burst", attackCosmos);
+}
+
+function attackPegasus() {
+  const dmg = Math.floor(Math.random() * 15) + 10;
+  bossHP -= dmg;
+  if (bossHP <= 0) return winBattle();
+  bossAttack();
+}
+
+function attackCosmos() {
+  const dmg = Math.floor(Math.random() * 25) + 15;
+  bossHP -= dmg;
+  playerHP -= 5;
+  if (bossHP <= 0) return winBattle();
+  bossAttack();
+}
+
+function bossAttack() {
+  const dmg = Math.floor(Math.random() * 15) + 8;
+  playerHP -= dmg;
+  if (playerHP <= 0) return loseBattle();
+  updateBattleUI();
+}
+
+function winBattle() {
+  mode = "story";
+  hpEl.textContent = "";
+  showText(
+    "'Tidak mungkin aku kalah oleh anak 15 tahun!'\n\n" +
+    "Minos melarikan diri ke kegelapan."
+  );
+  clearChoices();
+  addChoice("Dafa kelelahan", collapseScene);
+}
+
+function loseBattle() {
+  hpEl.textContent = "";
+  showText(
+    "Kosmomu habis.\n\n" +
+    "Kegelapan menelan segalanya...\n\n" +
+    "GAME OVER"
+  );
+  clearChoices();
+  addChoice("Main Ulang", startStory);
+}
+
+/* ===== END CHAPTER ===== */
+
+function collapseScene() {
+  showText(
+    "Dafa pingsan setelah membakar seluruh kosmonya.\n\n" +
+    "Athena berbisik:\n" +
+    "'Terima kasih Pegasus Dafa.\n" +
+    "Hentikan rencana gerhana abadi Hades.'"
+  );
+  clearChoices();
+  addChoice("Terbangun perlahan", endScene);
+}
+
+function endScene() {
+  showText(
+    "Dafa terbangun dalam kondisi lemah.\n\n" +
+    "Perjalanan menyelamatkan Cynthia baru saja dimulai...\n\n" +
+    "— Chapter 1 Tamat —"
+  );
+  clearChoices();
+  addChoice("Main Ulang", startStory);
+}
+
+startStory();
+</script>
+
+</body>
+</html>
+  <a href="chapter2.html">
+  <button>Lanjut ke Chapter 2</button>
+</a>        <p>
+  
+</p>

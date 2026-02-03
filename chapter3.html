@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Pegasus Dafa – Chapter 3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #000000, #2b0000);
+    color: white;
+    text-align: center;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: rgba(0,0,0,0.8);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.story {
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: darkred;
+    color: white;
+    font-size: 16px;
+}
+
+button:hover {
+    background: crimson;
+}
+
+.hp {
+    margin: 10px 0;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Chapter 3 – Penjara Hades</h1>
+    <div id="hp" class="hp"></div>
+    <div id="story" class="story"></div>
+    <div id="buttons"></div>
+</div>
+
+<script>
+let antuniusHP = 50;
+
+function show(text, buttons = []) {
+    document.getElementById("story").innerHTML = text;
+    const btnDiv = document.getElementById("buttons");
+    btnDiv.innerHTML = "";
+    buttons.forEach(b => {
+        const btn = document.createElement("button");
+        btn.innerText = b.text;
+        btn.onclick = b.action;
+        btnDiv.appendChild(btn);
+    });
+}
+
+function updateHP() {
+    document.getElementById("hp").innerHTML =
+        "HP Antunius: " + antuniusHP;
+}
+
+// Scene 1
+function scene1() {
+    show(
+        "Setelah menyebrangi sungai Dunia Bawah,<br><br>" +
+        "Dafa dan Dragon Syaki tiba di sebuah kompleks mengerikan.<br>" +
+        "<b>Penjara Hades</b> — terdiri dari 12 penjara yang dijaga Specter berbeda.",
+        [
+            { text: "Masuk Penjara No. 1", action: scene2 }
+        ]
+    );
+}
+
+// Scene 2
+function scene2() {
+    show(
+        "Penjara Hades No. 1 sangat gelap dan berbau darah.<br><br>" +
+        "Sesosok Specter muncul sambil tertawa.",
+        [
+            { text: "Hadapi Specter", action: scene3 }
+        ]
+    );
+}
+
+// Scene 3 – Antunius muncul
+function scene3() {
+    antuniusHP = 50;
+    updateHP();
+    show(
+        "\"Aku Antunius!\"<br>" +
+        "\"Specter terlemah Hades, tapi cukup untuk membunuh kalian!\"",
+        [
+            { text: "Serang Antunius", action: fight }
+        ]
+    );
+}
+
+// Fight system sederhana
+function fight() {
+    const damage = Math.floor(Math.random() * 15) + 5;
+    antuniusHP -= damage;
+    if (antuniusHP < 0) antuniusHP = 0;
+    updateHP();
+
+    if (antuniusHP <= 0) {
+        show(
+            "Dafa dan Syaki menyerang bersama!<br><br>" +
+            "Antunius berteriak kesakitan dan akhirnya tumbang.",
+            [
+                { text: "Lanjutkan", action: victory }
+            ]
+        );
+    } else {
+        show(
+            "Serangan berhasil!<br>" +
+            "Antunius menerima <b>" + damage + "</b> damage!",
+            [
+                { text: "Serang Lagi", action: fight }
+            ]
+        );
+    }
+}
+
+// Victory
+function victory() {
+    show(
+        "Antunius dikalahkan.<br><br>" +
+        "Syaki: \"Kalau ini Specter terlemah, penjara berikutnya akan lebih berbahaya.\"<br><br>" +
+        "Dafa mengangguk, Cosmo-nya semakin kuat.",
+        [
+            { text: "Menuju Penjara No. 2", action: () => alert("Chapter 4 akan datang!") }
+        ]
+    );
+}
+
+scene1();
+</script>
+
+</body>
+</html>
