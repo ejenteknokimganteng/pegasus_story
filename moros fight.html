@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Chapter 4 - Andromeda Shun</title>
+<style>
+body {
+  background: black;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+  padding: 20px;
+}
+
+#story {
+  white-space: pre-line;
+  min-height: 140px;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 16px;
+  margin: 6px;
+  font-size: 16px;
+  background: #4169e1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+#arena {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  background: radial-gradient(circle, #12001a, #000);
+  overflow: hidden;
+}
+
+/* NEBULA CHAIN */
+.chain {
+  position: absolute;
+  width: 6px;
+  height: 80px;
+  background: linear-gradient(#ff69b4, #da70d6, #9400d3);
+  animation: chainMove 0.5s linear forwards;
+}
+
+@keyframes chainMove {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(260px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<h2>CHAPTER 4<br>Penjara Kedua – Hakim Neraka</h2>
+
+<div id="story"></div>
+<div id="choices"></div>
+<div id="arena"></div>
+
+<script>
+const story = document.getElementById("story");
+const choices = document.getElementById("choices");
+const arena = document.getElementById("arena");
+
+function clearChoices() {
+  choices.innerHTML = "";
+}
+
+function addBtn(text, fn) {
+  const b = document.createElement("button");
+  b.textContent = text;
+  b.onclick = fn;
+  choices.appendChild(b);
+}
+
+function start() {
+story.textContent =
+`Moros berdiri tanpa luka.
+
+pegasus dafa terjatuh.
+Dragon Syaki berlutut.
+
+"Tekad kalian belum cukup," ujar Moros.
+
+Aura kematian menyelimuti arena...`;
+
+clearChoices();
+addBtn("Bangkit!", struggle);
+}
+
+function struggle() {
+story.textContent =
+`Moros menyerang tanpa ampun!
+
+Kosmo Dafa dan Syaki hampir habis...
+Saat itu—rantai bercahaya turun dari langit neraka!`;
+
+clearChoices();
+addBtn("?? Siapa itu?!", shunArrives);
+}
+
+function shunArrives() {
+story.textContent =
+`"Hentikan, Moros."
+
+Seorang Saint berbaju hijau muda muncul.
+
+"Aku Andromeda Shun.
+Aku tidak akan membiarkan temanku mati."`;
+
+clearChoices();
+addBtn("Andromeda Shun menyerang!", nebulaCharge);
+}
+
+function nebulaCharge() {
+for (let i = 0; i < 18; i++) {
+  setTimeout(() => {
+    const c = document.createElement("div");
+    c.className = "chain";
+    c.style.left = Math.random() * 100 + "%";
+    arena.appendChild(c);
+    setTimeout(() => c.remove(), 600);
+  }, i * 70);
+}
+
+setTimeout(victory, 1500);
+}
+
+function victory() {
+story.textContent =
+`"NEBULA CHARGE!"
+
+Rantai kosmo menghantam Moros tanpa ampun!
+
+"Mustahil..." teriak Moros sebelum tumbang.
+
+Penjara Kedua runtuh.
+Gerbang Penjara Ketiga terbuka...`;
+
+clearChoices();
+addBtn("Lanjut ke Chapter4", () => {
+  window.location.href = "chapter5 akan mendatang";
+});
+}
+
+start();
+</script>
+
+</body>
+</html>

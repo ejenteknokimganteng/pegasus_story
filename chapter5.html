@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2 – Penjara Hades</title>
+
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #story {
+      margin-bottom: 20px;
+      white-space: pre-line;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 18px;
+      margin: 5px;
+      background: crimson;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Chapter 4 – Penjara Nomor Dua</h2>
+
+<div id="story"></div>
+<div id="choices"></div>
+
+<script>
+const story = document.getElementById("story");
+const choices = document.getElementById("choices");
+
+function clearChoices() {
+  choices.innerHTML = "";
+}
+
+function addBtn(text, fn) {
+  const b = document.createElement("button");
+  b.textContent = text;
+  b.onclick = fn;
+  choices.appendChild(b);
+}
+
+function start() {
+story.textContent =
+`Antonius telah dikalahkan.
+
+Dafa Pegasus dan Dragon Syaki
+berjalan menuju Penjara Nomor Dua.
+
+Lorong neraka terasa sunyi...`;
+
+clearChoices();
+addBtn("Lanjutkan", dialog1);
+}
+
+function dialog1() {
+story.textContent =
+`Syaki:
+"Dafa… apa tujuanmu menjadi Saint?"`;
+
+clearChoices();
+addBtn("Jawab", dialog2);
+}
+
+function dialog2() {
+story.textContent =
+`Dafa:
+"Aku ingin menyelamatkan Scyintia dan Athena.
+Aku juga ingin melindungi dunia."
+
+"Kalau kau sendiri, Syaki?"`;
+
+clearChoices();
+addBtn("Dengarkan", dialog3);
+}
+
+function dialog3() {
+story.textContent =
+`Syaki:
+"Kedua orang tuaku tewas karena Hades.
+
+Aku tinggal bersama guruku, Libra Dohko,
+namun beliau juga gugur di hadapanku."`;
+
+clearChoices();
+addBtn("Lanjut", dialog4);
+}
+
+function dialog4() {
+story.textContent =
+`Syaki:
+"Beliau memintaku pergi ke air terjun.
+Di sanalah aku berlatih.
+
+Aku diminta mengenakan Dragon Cloth
+untuk menggagalkan rencana Hades."`;
+
+clearChoices();
+addBtn("Hampir sampai", dialog5);
+}
+
+function dialog5() {
+story.textContent =
+`Dafa:
+"Kau benar-benar hebat, Dragon."
+
+Syaki:
+"Mari kita kalahkan Hades bersama."
+
+Mereka tiba di Penjara Nomor Dua...`;
+
+clearChoices();
+addBtn("Masuk Penjara", () => {
+  alert("Boss Fight akan dimulai!");
+});
+}
+
+start();
+</script>
+  <a href="moros fight.html">
+  <button>hadapi moros</button>
+</a>
